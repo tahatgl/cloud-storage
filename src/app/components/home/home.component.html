@@ -1,0 +1,44 @@
+<!--<div *ngIf="currentFileUpload" class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped"
+        role="progressbar" attr.aria.valuenow="{{percentage}}"
+        aria-valuemin="0" aria-valuenow="100"
+        [ngStyle]="{width: percentage+'%'}">{{percentage}}%</div>
+</div>
+
+<label class="btn btn-default"> <input type="file"
+    (change)="selectFile($event)" style="color:darkred;">
+</label>
+
+<button class="btn btn-success" [disabled]="!secili"
+    (click)="upload()">Yükle</button> -->
+
+<div class="col-md-12 mt-3 text-right">
+    <h4 style="color: bisque;">{{ad}} oturumu<button class="btn btn-outline-danger ml-3" (click)="kapat()"
+        *ngIf="firebaseservice.logInControl()">Çıkış</button></h4>
+    
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div style="color:white; font-family: Georgia, 'Times New Roman', Times, serif;">
+                <h3>Firebase Bulut Depolama</h3>
+            </div>
+        </div>
+        <div class="col-md-12 mt-5 text-center" style="position: relative; left: -21px;">
+            <div *ngIf="currentFileUpload" class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                    attr.aria.valuenow="{{percentage}}" aria-valuemin="0" aria-valuenow="100"
+                    [ngStyle]="{width: percentage+'%'}">{{percentage}}%</div>
+            </div>
+            <label class="btn btn-default"> <input type="file" (change)="selectFile($event)" style="color:darkred;">
+            </label>
+
+            <button class="btn btn-success" [disabled]="!secili" (click)="upload()">Yükle</button>
+        </div>
+        <div class="col-md-12 mt-5 text-center">
+            <app-list></app-list>
+        </div>
+    </div>
+</div>

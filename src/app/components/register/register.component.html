@@ -1,0 +1,64 @@
+<!--
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form #frm="ngForm" (ngSubmit)="kayitYap()">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Sign Up</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Adınız Soyadız</label>
+                            <input type="text" class="form-control" name="adsoyad" #adsoyad [(ngModel)]="secUye.adsoyad"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>E-Mail Adresiniz</label>
+                            <input type="text" class="form-control" name="mail" #mail [(ngModel)]="secUye.mail"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label>Şifreniz</label>
+                            <input type="password" class="form-control" name="parola" #parola
+                                [(ngModel)]="secUye.parola" required>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <input type="submit" class="btn btn-outline-primary btn-block" value="Sign Up" [disabled]="frm.invalid">
+                        <button class="btn btn-link btn-block" [routerLink]="['/login']">Hesabınız var mı? Giriş
+                            Yapın</button>
+                    </div>
+                </div>
+            </form>
+            <div [ngClass]="sonuc.islem ? 'alert alert-succes' : 'alert alert-danger' " *ngIf="sonuc.mesaj?.length>0">{{
+                sonuc.mesaj }}</div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <form class="box" #frm="ngForm" (ngSubmit)="kayitYap()">
+                    <h2>Üye Ol</h2>
+                    <p class="text-muted">Lütfen Üye Bilgilerinizi Girin</p>
+                    <input type="text" name="adsoyad" #adsoyad [(ngModel)]="secUye.adsoyad"
+                        placeholder="Adınız Soyadınız" required>
+                    <input type="text" name="mail" #mail [(ngModel)]="secUye.mail" placeholder="E-mail Adresiniz"
+                        required>
+                    <input type="password" name="parola" #parola [(ngModel)]="secUye.parola" placeholder="Parolanız"
+                        required>
+                    <input type="submit" class="btn btn-outline-primary btn-block" value="Üye Ol"
+                        [disabled]="frm.invalid">
+                    <a class="forgot text-muted" [routerLink]="['/login']">Zaten Üye misin?</a> <br><br>
+                    <div [ngClass]="sonuc.islem ? 'alert alert-succes' : 'alert alert-danger' " *ngIf="sonuc.mesaj?.length>0">{{
+                        sonuc.mesaj }}</div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
