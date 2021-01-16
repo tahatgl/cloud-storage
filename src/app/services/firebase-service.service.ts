@@ -15,7 +15,7 @@ import { Uye } from '../models/uye';
   providedIn: 'root'
 })
 export class FirebaseServiceService {
-  private dbYol = '/yüklemeler';
+  private basePath = '/yüklemeler';
   private dbUye = '/üyeler';
   uyeRef: AngularFireList<Uye> = null;
   kayitRef: AngularFireList<DosyaYukle> = null;
@@ -23,7 +23,7 @@ export class FirebaseServiceService {
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage,
     public afAuth: AngularFireAuth) {
     this.uyeRef = db.list(this.dbUye);
-    this.kayitRef = db.list(this.dbYol);
+    this.kayitRef = db.list(this.basePath);
   }
 
   giris(mail: string, parola: string) {
@@ -50,47 +50,47 @@ export class FirebaseServiceService {
     }
   }
 
-  pushFileStorage(fileUpload: DosyaYukle): Observable<number> {
-    const filePath = `${this.dbYol}/${fileUpload.file.name}`;
+  yukleStorage(dosyaYukle: DosyaYukle): Observable<number> {
+    const filePath = `${this.basePath}/${dosyaYukle.file.name}`;
     const storageRef = this.storage.ref(filePath);
-    const uploadTask = this.storage.upload(filePath, fileUpload.file);
+    const yuklemeTask = this.storage.upload(filePath, dosyaYukle.file);
 
-    uploadTask.percentageChanges().pipe(
+    yuklemeTask.percentageChanges().pipe(
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
-          fileUpload.url = downloadURL;
-          fileUpload.name = fileUpload.file.name;
-          this.kaydet(fileUpload);
+          dosyaYukle.url = downloadURL;
+          dosyaYukle.name = dosyaYukle.file.name;
+          this.kaydet(dosyaYukle);
         });
       })
     ).subscribe();
 
-    return uploadTask.percentageChanges();
+    return yuklemeTask.percentageChanges();
   }
 
-  private kaydet(fileUpload: DosyaYukle) {
-    this.db.list(this.dbYol).push(fileUpload);
+  private kaydet(dosyaYukle: DosyaYukle) {
+    this.db.list(this.basePath).push(dosyaYukle);
   }
 
-  yukleme(numara): AngularFireList<DosyaYukle> {
-    return this.db.list(this.dbYol, ref =>
-      ref.limitToLast(numara));
+  yukleme(n): AngularFireList<DosyaYukle> {
+    return this.db.list(this.basePath, ref =>
+      ref.limitToLast(n));
   }
 
-  silme(fileUpload: DosyaYukle) {
-    this.deleteFileDatabase(fileUpload.key)
+  silme(dosyaYukle: DosyaYukle) {
+    this.silDatabase(dosyaYukle.key)
       .then(() => {
-        this.deleteFileStorage(fileUpload.name);
+        this.silStorage(dosyaYukle.name);
       })
       .catch(error => console.log(error));
   }
 
-  private deleteFileDatabase(key: string) {
-    return this.db.list(this.dbYol).remove(key);
+  private silDatabase(key: string) {
+    return this.db.list(this.basePath).remove(key);
   }
 
-  private deleteFileStorage(name: string) {
-    const storageRef = this.storage.ref(this.dbYol);
+  private silStorage(name: string) {
+    const storageRef = this.storage.ref(this.basePath);
     storageRef.child(name).delete();
   }
 

@@ -10,14 +10,14 @@ import { ListComponent } from '../list/list.component';
   styleUrls: ['./detay.component.css']
 })
 export class DetayComponent implements OnInit {
-  @Input() fileUpload: DosyaYukle;
+  @Input() dosyaYukle: DosyaYukle;
 
   constructor(private firebaseService: FirebaseServiceService) { }
 
   ngOnInit(): void {
   }
   
-  silme(fileUpload) {
-    this.firebaseService.silme(fileUpload);
+  silme(dosyaYukle) {
+    this.firebaseService.silme(dosyaYukle);
   }
 }

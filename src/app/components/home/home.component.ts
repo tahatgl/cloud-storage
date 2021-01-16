@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   secili: FileList;
-  currentFileUpload: DosyaYukle;
+  yukluDosya: DosyaYukle;
   percentage: number;
   ad: string;
 
@@ -24,16 +24,16 @@ export class HomeComponent implements OnInit {
     this.ad = user.displayName;
   }
 
-  selectFile(event) {
+  dosyaSec(event) {
     this.secili = event.target.files;
   }
 
-  upload() {
+  yukle() {
     const file = this.secili.item(0);
     this.secili = undefined;
 
-    this.currentFileUpload = new DosyaYukle(file);
-    this.firebaseService.pushFileStorage(this.currentFileUpload).subscribe(
+    this.yukluDosya = new DosyaYukle(file);
+    this.firebaseService.yukleStorage(this.yukluDosya).subscribe(
       percentage => {
         this.percentage = Math.round(percentage);
       },
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
       }
     );
     var user = JSON.parse(localStorage.getItem("user"));
-    this.currentFileUpload.uid = user.uid;
+    this.yukluDosya.uid = user.uid;
     
   }
 
