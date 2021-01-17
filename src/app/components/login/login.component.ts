@@ -11,7 +11,7 @@ import { FirebaseServiceService } from '../../services/firebase-service.service'
 export class LoginComponent implements OnInit {
   sonuc: Sonuc = new Sonuc();
 
-  constructor(public firebaseService: FirebaseServiceService, public router: Router) { }
+  constructor(private firebaseService: FirebaseServiceService, public router: Router) { }
 
   ngOnInit(): void {
   }

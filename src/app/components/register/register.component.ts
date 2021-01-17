@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   sonuc: Sonuc = new Sonuc();
   secUye: Uye = new Uye();
 
-  constructor(public firebaseService: FirebaseServiceService, public router: Router) { }
+  constructor(private firebaseService: FirebaseServiceService, public router: Router) { }
 
   ngOnInit(): void {
   }
