@@ -4,6 +4,7 @@ export class DosyaYukle {
     url: string;
     file: File;
     uid: string;
+    kayTarih: string;
 
     constructor(file: File) {
         this.file = file;

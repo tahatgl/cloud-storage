@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
     }).catch(error => {
       this.sonuc.islem = false;
-      this.sonuc.mesaj = error.message;   
+      this.sonuc.mesaj = error.message;
     });
   }
 

@@ -43,6 +43,8 @@ export class HomeComponent implements OnInit {
     );
     var user = JSON.parse(localStorage.getItem("user"));
     this.yukluDosya.uid = user.uid;
+    var tarih = new Date();
+    this.yukluDosya.kayTarih = tarih.getTime().toString();
     
   }
 

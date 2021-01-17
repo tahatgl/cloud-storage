@@ -1,3 +1,3 @@
 
-<a href="{{dosyaYukle.url}}" style="color: bisque;">{{dosyaYukle.name}}</a>
-<button (click)='silme(dosyaYukle)' class="btn btn-outline-danger btn-sm" style="float: right; margin-left: 70px; margin-bottom: 3px;">Sil</button>
+<a href="{{dosyaYukle.url}}" style="color: bisque;">{{dosyaYukle.name}}</a> <hr> <b style="color: #20155e;">Eklenme Tarihi: </b>{{dosyaYukle.kayTarih | date:'dd.MM.yyyy HH:mm:ss'}}
+<button (click)='silme(dosyaYukle)' class="btn btn-outline-danger btn-sm" style="float: right; margin-left: 70px;">Sil</button><br><br><br>

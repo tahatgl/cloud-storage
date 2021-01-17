@@ -33,13 +33,13 @@
     <div class="row">
         <div class="col-md-6">
             <div class="card">
-                <form #frm class="box">
+                <form class="box">
                     <h2>Hesabına Giriş Yap</h2>
                     <p class="text-muted">Lütfen Üye Bilgilerinizi Girin</p>
                     <input type="text" name="mail" #mail placeholder="E-mail Adresiniz">
                     <input type="password" name="parola" #parola placeholder="Parolanız">
                     <input type="submit" class="btn btn-outline-primary btn-block"
-                        (click)="girisYap(mail.value, parola.value)" value="Giriş Yap" [disabled]="frm.invalid">
+                        (click)="girisYap(mail.value, parola.value)" value="Giriş Yap">
                     <a class="forgot text-muted" [routerLink]="['/register']">Üye Değil misin?</a> <br><br>
                     <div [ngClass]="sonuc.islem ? 'alert alert-succes' : 'alert alert-danger' " *ngIf="sonuc.mesaj?.length>0">{{ sonuc.mesaj }}</div>
                 </form>
