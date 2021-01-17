@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { DosyaYukle } from '../../models/dosyayukle';
 import { FirebaseServiceService } from '../../services/firebase-service.service';
-import { ListComponent } from '../list/list.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-detay',
@@ -12,12 +12,13 @@ import { ListComponent } from '../list/list.component';
 export class DetayComponent implements OnInit {
   @Input() dosyaYukle: DosyaYukle;
 
-  constructor(private firebaseService: FirebaseServiceService) { }
+  constructor(private firebaseService: FirebaseServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
   
   silme(dosyaYukle) {
     this.firebaseService.silme(dosyaYukle);
+    this.toastr.warning("Dosyanız Silindi.", "", {positionClass: 'toastr-top-left'});
   }
 }

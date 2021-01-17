@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseServiceService } from '../../services/firebase-service.service';
 import { DosyaYukle } from '../../models/dosyayukle';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,9 @@ export class HomeComponent implements OnInit {
 
   constructor(private firebaseService: FirebaseServiceService,
     public firebaseservice: FirebaseServiceService,
-    public router: Router) { }
+    public router: Router,
+    public toastr: ToastrService) { }
+
 
   ngOnInit(): void {
     var user = JSON.parse(localStorage.getItem("user"));
@@ -36,9 +39,14 @@ export class HomeComponent implements OnInit {
     this.firebaseService.yukleStorage(this.yukluDosya).subscribe(
       percentage => {
         this.percentage = Math.round(percentage);
+        if (percentage == 100) {
+          this.toastr.success("Dosyanız Yüklendi.","", {positionClass: 'toast-top-left'});
+        }
       },
       error => {
         console.log(error);
+        this.toastr.error("Lütfen tekrar deneyin.","Hata Oluştu!", {positionClass: 'toast-top-left'});
+
       }
     );
     var user = JSON.parse(localStorage.getItem("user"));
@@ -52,6 +60,7 @@ export class HomeComponent implements OnInit {
     this.firebaseService.cikis().then(d => {
       localStorage.removeItem("user");
       this.router.navigate(['/login']);
+      this.toastr.info("Oturumunuz Kapatıldı.");
     });
   }
 
